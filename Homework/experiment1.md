@@ -86,7 +86,7 @@ git pull
 ![myself](img/myself.png)
 ![GitClone](img/GitClone.jpg)
 #### 关联自己的仓库到github
-
+![firstCommit](img/firstCommit.png)
 
 ### 二、Git基础学习——来源[learngitbranching.js.org](https://learngitbranching.js.org)
 ### 1.Git Commit（提交文件）
