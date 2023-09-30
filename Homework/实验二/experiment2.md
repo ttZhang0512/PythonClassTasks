@@ -1,14 +1,14 @@
 # 实验二 Python变量、简单数据类型
 
-班级： 21计科1班
+班级： 21计科4班
 
-学号： 202302200000
+学号： 20210301105
 
-姓名： 张三
+姓名： 张湘睿
 
-Github地址：<https://github.com/yourusername/python_course>
+Github地址：<https://github.com/ttZhang0512/PythonClassTasks.git>
 
-CodeWars地址：<https://www.codewars.com/users/yourusername>
+CodeWars地址：<https://www.codewars.com/users/ttZhang0512>
 
 ---
 
@@ -49,7 +49,7 @@ Python变量、简单数据类型和列表简介
 
 完成教材《Python编程从入门到实践》下列章节的练习：
 
-- 第2章 变量和简单数据类型
+- 第2章 变量和简单数据类型s
 
 ---
 
@@ -120,7 +120,7 @@ Python变量、简单数据类型和列表简介
 
 使用Markdown语法绘制你的程序绘制程序流程图（至少一个），Markdown代码如下：
 
-![程序流程图](/Experiments/img/2023-08-05-22-00-00.png)
+![程序流程图](img/2023-08-05-22-00-00.png)
 
 显示效果如下：
 
@@ -135,52 +135,80 @@ flowchart LR
 
 查看Mermaid流程图语法-->[点击这里](https://mermaid.js.org/syntax/flowchart.html)
 
-使用Markdown编辑器（例如VScode）编写本次实验的实验报告，包括[实验过程与结果](#实验过程与结果)、[实验考查](#实验考查)和[实验总结](#实验总结)，并将其导出为 **PDF格式** 来提交。
-
 ## 实验过程与结果
 
 请将实验过程与结果放在这里，包括：
 
 - [第二部分 Python变量、简单数据类型和列表简介](#第二部分)
 - [第三部分 Codewars Kata挑战](#第三部分)
-- [第四部分 使用Mermaid绘制程序流程图](#第四部分)
+- [第四部分 使用Mermaid绘制程序流程图](#第四部分)  
 
-注意代码需要使用markdown的代码块格式化，例如Git命令行语句应该使用下面的格式：
+### 第二部分 Python变量、简单数据类型和列表简介  
 
-![Git命令](/Experiments/img/2023-07-26-22-48.png)
+#### 第一题实验代码
 
-显示效果如下：
+  ```python
+import math
+def nearest_sq(n):
+    num2 = (int)(math.sqrt(n))
+    gap = (int)(math.fabs(n-num2*num2))
+    if gap==0: 
+        return num2*num2
+    gap2 = (int)(math.fabs(n-(num2+1)*(num2+1)))
+    if gap2<gap:
+        num2 = num2+1
+    return num2*num2
+  ```  
 
-```bash
-git init
-git add .
-git status
-git commit -m "first commit"
-```
+---
 
-如果是Python代码，应该使用下面代码块格式，例如：
-
-![Python代码](/Experiments/img/2023-07-26-22-52-20.png)
-
-显示效果如下：
+#### 第二题实验代码
 
 ```python
-def add_binary(a,b):
-    return bin(a+b)[2:]
+def bouncing_ball(h, bounce, window):
+    if(h<=window or h<=0 or bounce<=0 or bounce>=1): return -1
+    exp = 1
+    h = h*bounce
+    while(h>window):
+        exp += 2
+        h = h*bounce
+    return exp
+```  
+
+---
+
+#### 第三题实验代码
+
+```python
+def get_count(sentence):
+    count = 0
+    count = sentence.count('a')+sentence.count('e')+sentence.count('i')+sentence.count('o')+sentence.count('u')
+    return count
 ```
 
-代码运行结果的文本可以直接粘贴在这里。
+#### 第四题实验代码
 
-**注意：不要使用截图，Markdown文档转换为Pdf格式后，截图可能会无法显示。**
+```python
+import math
+def even_or_odd(number):
+    if math.fabs(number)%2==0: 
+        return "Even"
+    else:
+        return "Odd"  
+```
 
 ## 实验考查
 
 请使用自己的语言并使用尽量简短代码示例回答下面的问题，这些问题将在实验检查时用于提问和答辩以及实际的操作。
 
-1. Python中的简单数据类型有那些？我们可以对这些数据类型做哪些操作？
-2. 为什么说Python中的变量都是标签？
-3. 有哪些方法可以提高Python代码的可读性？
+1. Python中的简单数据类型有那些？我们可以对这些数据类型做哪些操作？  
+   Python中的简单数据类型包括整型（int）、浮点型（float）、布尔型（bool）和字符串（str）。我们可以对这些数据类型进行加法、减法、乘法和除法等算术运算；比较大小；逻辑运算（与、或、非）；字符串拼接、切片等操作。
+2. 为什么说Python中的变量都是标签？  
+   在Python中，变量实际上是对对象的引用，也称作标签。当我们将一个值赋给一个变量时，实际上是将这个值的内存地址赋给了变量。因此，我们可以通过变量来访问和操作这个值。
+3. 有哪些方法可以提高Python代码的可读性？  
+   使用有意义的变量名和函数名；提高代码编写的规范性，合理安排代码块和缩进等；添加注释，解释代码的功能和原理；保持代码结构清晰，模块化，避免过长的函数和复杂的逻辑编写单元测试和集成测试，确保代码的正确性和稳定性。
 
 ## 实验总结
 
-总结一下这次实验你学习和使用到的知识，例如：编程工具的使用、数据结构、程序语言的语法、算法、编程技巧、编程思想。
+总结一下这次实验你学习和使用到的知识，例如：编程工具的使用、数据结构、程序语言的语法、算法、编程技巧、编程思想。  
+在本次实验中，我通过编写代码来实践和掌握了Python的基本语法规则，加深了对Python语言的理解，了解了Python中的不同数据类型，如整数（int）、浮点数（float）、字符串（str）和布尔值（bool），以及如何声明和使用变量。然后，我学习到了Python中的常用运算符，如算术运算符（+、-、*、/、%、**）、比较运算符（==、！=、>、<、>=、<=）和逻辑运算符（and、or、not）。除此之外，我还学习到了Python中的控制流程语句，如条件语句（if-else）、循环语句（for、while）和异常处理（try-except）等。
