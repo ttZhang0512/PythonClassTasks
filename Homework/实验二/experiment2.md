@@ -140,10 +140,112 @@ flowchart LR
 请将实验过程与结果放在这里，包括：
 
 - [第二部分 Python变量、简单数据类型和列表简介](#第二部分)
-- [第三部分 Codewars Kata挑战](#第三部分)
-- [第四部分 使用Mermaid绘制程序流程图](#第四部分)  
 
-### 第二部分 Python变量、简单数据类型和列表简介  
+#### 课本练习
+
+##### 2.1：简单消息
+
+```python
+message = "simple_message"
+print(message)
+```
+
+##### 2.2：多条简单消息  
+
+```python
+message = "simple_message"
+print(message)
+message = "new_message"
+print(message)
+```
+
+##### 2.3：个性化消息
+
+```python
+name = "Eric"
+message = "Hello "+name+",would you like to learn some Python today?"
+print(message)
+```
+
+##### 2.4：调整名字的大小写
+
+```python
+name = "ERIC"
+print(name.lower())
+print(name.upper())
+print(name.capitalize())
+```
+
+##### 2.5：名言1
+
+```python
+proverb = "Brevity is the soul of wit."
+name = "Shakespeare"
+print(name + " once said ,\""+proverb+"\"")
+```
+
+##### 2.6：名言2
+
+```python
+proverb = "Brevity is the soul of wit."
+famous_person = "Shakespeare"
+message = famous_person + " once said ,\""+proverb+"\""
+print(message)
+```
+
+##### 2.7：删除人名中的空白
+
+```python
+famous_person = "\tShakespeare\n"
+print(famous_person)
+print(famous_person.lstrip())
+print(famous_person.rstrip())
+print(famous_person.strip())
+```
+
+##### 2.8：文件拓展名
+
+```python
+filename = "python_notes.txt"
+print(filename.removesuffix(".txt"))
+```
+
+##### 2.9：数字8
+
+```python
+print(4+4)
+print(8-0)
+print(2*4)
+print(int(8/1))
+```
+
+##### 2.10：最喜欢的数
+
+```python
+number = 1128
+message = "My favoriate number is "+str(number)
+print(message)
+```
+
+##### 2.11：添加注释
+
+```python
+# The first code:
+filename = "python_notes.txt"
+print(filename.removesuffix(".txt"))    #removesuffix() is a way to remove some str that we don't want.
+
+# The second code:
+# The author is xr.Zhang,made in Sept.30.It's made for print a sentense.
+number = 1128
+message = "My favoriate number is "+str(number)
+print(message)
+```
+
+##### 2.12：Python之禅
+
+![终端运行import this结果](img/output.png)
+
+- [第三部分 Codewars Kata挑战](#第三部分)
 
 #### 第一题实验代码
 
@@ -186,6 +288,8 @@ def get_count(sentence):
     return count
 ```
 
+---
+
 #### 第四题实验代码
 
 ```python
@@ -196,6 +300,95 @@ def even_or_odd(number):
     else:
         return "Odd"  
 ```
+
+---
+
+- [第四部分 使用Mermaid绘制程序流程图](#第四部分)  
+  
+#### 第一题流程
+
+```mermaid
+graph LR
+A(开始)
+B["gap = (math.fabs(n-num2*num2))"]
+D{gap == 0?}
+E{gap2 < gap?}
+I["计算 gap2 = math.fabs(n-(num2+1)*(num2+1))"]
+J[ num2+1 ]
+K[return num2*num2]
+A --> B
+B --> D
+D -- yes --> K
+D -- no --> I
+I --> E
+E -- yes --> J
+E -- no --> K
+J --> K
+K --> L(结束)
+```
+
+---
+
+#### 第二题流程
+
+```mermaid
+graph LR
+A(开始)
+B["h<=window or h<=0 or bounce<=0 or bounce>=1 ？"]
+D[return -1]
+E[ exp=1 ]
+F["exp+=2"]
+H["h=h*bounce"]
+I["h=h*bounce"]
+J{ h>window? }
+K[return exp]
+A --> B
+B-- yes --> D
+D --> L(结束)
+B -- no --> E
+E --> I
+I -->J
+J -- no --> K
+J -- yes --> F
+F --> H
+H --> K
+K --> L(结束)
+```
+
+---
+
+#### 第三题流程
+
+```mermaid
+graph LR
+A(开始)
+B["count=0"]
+C["count = sentence.count('a')+sentence.count('e')+sentence.count('i')+sentence.count('o')+sentence.count('u')"]
+D[return count]
+A --> B
+B--> C 
+C --> D
+D --> F(结束)
+```
+
+---
+
+#### 第四题流程
+
+```mermaid
+graph LR
+A(开始)
+B{"math.fabs(number)%2=0 ？"}
+C["return Even"]
+D["return Odd"]
+A --> B
+B-- yes --> C 
+B -- no --> D
+C --> E(结束)
+D --> E(结束)
+```
+
+---
 
 ## 实验考查
 
@@ -208,7 +401,9 @@ def even_or_odd(number):
 3. 有哪些方法可以提高Python代码的可读性？  
    使用有意义的变量名和函数名；提高代码编写的规范性，合理安排代码块和缩进等；添加注释，解释代码的功能和原理；保持代码结构清晰，模块化，避免过长的函数和复杂的逻辑编写单元测试和集成测试，确保代码的正确性和稳定性。
 
+---
+
 ## 实验总结
 
 总结一下这次实验你学习和使用到的知识，例如：编程工具的使用、数据结构、程序语言的语法、算法、编程技巧、编程思想。  
-在本次实验中，我通过编写代码来实践和掌握了Python的基本语法规则，加深了对Python语言的理解，了解了Python中的不同数据类型，如整数（int）、浮点数（float）、字符串（str）和布尔值（bool），以及如何声明和使用变量。然后，我学习到了Python中的常用运算符，如算术运算符（+、-、*、/、%、**）、比较运算符（==、！=、>、<、>=、<=）和逻辑运算符（and、or、not）。除此之外，我还学习到了Python中的控制流程语句，如条件语句（if-else）、循环语句（for、while）和异常处理（try-except）等。
+在本次实验中，我通过编写代码来实践和掌握了Python的基本语法规则，加深了对Python语言的理解，了解了Python中的不同数据类型，如整数（int）、浮点数（float）、字符串（str）和布尔值（bool），以及如何声明和使用变量。然后，我学习到了Python中的常用运算符，如算术运算符（+、-、*、/、%、**）、比较运算符（==、！=、>、<、>=、<=）和逻辑运算符（and、or、not）。还学习到了Python中的控制流程语句，如条件语句（if-else）、循环语句（for、while）和异常处理（try-except）等。除此之外，还
