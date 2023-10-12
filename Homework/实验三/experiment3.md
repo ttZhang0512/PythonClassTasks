@@ -210,8 +210,6 @@ flowchart LR
 
 ### - [第一部分 Python列表操作和if语句](#第一部分)
 
-
-
 ### - [第二部分 Codewars Kata挑战](#第二部分)
 
 #### 第一题-3和5的倍数（Multiples of 3 or 5）实验代码
