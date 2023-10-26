@@ -1,14 +1,14 @@
 # 实验四 Python字典和while循环
 
-班级： 21计科1
+班级： 21计科4
 
-学号： 202302200000
+学号： 20210301105
 
-姓名： 张三
+姓名： 张湘睿
 
-Github地址：<https://github.com/yourusername/python_course>
+Github地址：<https://github.com/ttZhang0512/PythonClassTasks.git>
 
-CodeWars地址：<https://www.codewars.com/users/yourusername>
+CodeWars地址：<https://www.codewars.com/users/ttZhang0512>
 
 ---
 
@@ -309,7 +309,7 @@ $    ···–··–
 
 使用Markdown语法绘制你的程序绘制程序流程图（至少一个），Markdown代码如下：
 
-![程序流程图](/Experiments/img/2023-08-05-22-00-00.png)
+![程序流程图](img/2023-08-05-22-00-00.png)
 
 显示效果如下：
 
@@ -332,45 +332,273 @@ flowchart LR
 
 - [第一部分 Python列表操作和if语句](#第一部分)
 - [第二部分 Codewars Kata挑战](#第二部分)
-- [第三部分 使用Mermaid绘制程序流程图](#第三部分)
-
-注意代码需要使用markdown的代码块格式化，例如Git命令行语句应该使用下面的格式：
-
-![Git命令](/Experiments/img/2023-07-26-22-48.png)
-
-显示效果如下：
-
-```bash
-git init
-git add .
-git status
-git commit -m "first commit"
-```
-
-如果是Python代码，应该使用下面代码块格式，例如：
-
-![Python代码](/Experiments/img/2023-07-26-22-52-20.png)
-
-显示效果如下：
+ 
+### 第一题代码
 
 ```python
-def add_binary(a,b):
-    return bin(a+b)[2:]
+def naughty_or_nice(data):
+    naughty_times = 0
+    nice_times = 0
+    result = ""
+    for month in data:
+        for times in data[month]:
+            if data[month][times]=="Naughty":
+                naughty_times+=1
+            if data[month][times]=="Nice":
+                nice_times+=1
+    if naughty_times>nice_times:
+        result = "Naughty!"
+    else:
+        result = "Nice!"
+    return result
 ```
 
-代码运行结果的文本可以直接粘贴在这里。
+### 第二题代码
 
-**注意：不要使用截图，Markdown文档转换为Pdf格式后，截图可能会无法显示。**
+```python
+from itertools import product
+def get_pins(observed):   
+    next_num = {
+        "1" : ["1", "2", "4"],
+        "2" : ["1", "2", "3", "5"],
+        "3" : ["2", "3", "6"],
+        "4" : ["1", "4", "5", "7"],
+        "5" : ["2", "4", "5", "6", "8"],
+        "6" : ["3", "5", "6", "9"],
+        "7" : ["4", "7", "8"],
+        "8" : ["5", "7", "8", "9", "0"],
+        "9" : ["6", "8", "9"],
+        "0" : ["8", "0"]
+    }
+    answer = [next_num[num] for num in observed] 
+    result = [''.join(key) for key in product(*answer)]
+    return result
+```
+
+### 第三题代码
+
+```python
+def protein(rna):
+    PROTEIN_DICT = {
+    # Phenylalanine
+    'UUC': 'F', 'UUU': 'F',
+    # Leucine
+    'UUA': 'L', 'UUG': 'L', 'CUU': 'L', 'CUC': 'L', 'CUA': 'L', 'CUG': 'L',
+    # Isoleucine
+    'AUU': 'I', 'AUC': 'I', 'AUA': 'I',
+    # Methionine
+    'AUG': 'M',
+    # Valine
+    'GUU': 'V', 'GUC': 'V', 'GUA': 'V', 'GUG': 'V',
+    # Serine
+    'UCU': 'S', 'UCC': 'S', 'UCA': 'S', 'UCG': 'S', 'AGU': 'S', 'AGC': 'S',
+    # Proline
+    'CCU': 'P', 'CCC': 'P', 'CCA': 'P', 'CCG': 'P',
+    # Threonine
+    'ACU': 'T', 'ACC': 'T', 'ACA': 'T', 'ACG': 'T',
+    # Alanine
+    'GCU': 'A', 'GCC': 'A', 'GCA': 'A', 'GCG': 'A',
+    # Tyrosine
+    'UAU': 'Y', 'UAC': 'Y',
+    # Histidine
+    'CAU': 'H', 'CAC': 'H',
+    # Glutamine
+    'CAA': 'Q', 'CAG': 'Q',
+    # Asparagine
+    'AAU': 'N', 'AAC': 'N',
+    # Lysine
+    'AAA': 'K', 'AAG': 'K',
+    # Aspartic Acid
+    'GAU': 'D', 'GAC': 'D',
+    # Glutamic Acid
+    'GAA': 'E', 'GAG': 'E',
+    # Cystine
+    'UGU': 'C', 'UGC': 'C',
+    # Tryptophan
+    'UGG': 'W',
+    # Arginine
+    'CGU': 'R', 'CGC': 'R', 'CGA': 'R', 'CGG': 'R', 'AGA': 'R', 'AGG': 'R',
+    # Glycine
+    'GGU': 'G', 'GGC': 'G', 'GGA': 'G', 'GGG': 'G',
+    # Stop codon
+    'UAA': 'Stop', 'UGA': 'Stop', 'UAG': 'Stop'
+    }
+    codes = [rna[x:x+3] for x in range(0,len(rna),3)]
+    name = ''
+    for code in codes:
+        if PROTEIN_DICT[code]!='Stop':
+            name+=PROTEIN_DICT[code]
+        else:
+            break
+    return name
+```
+
+### 第四题代码
+
+```python
+def fillable(stock, merch, n):
+    if stock.get(merch,0)==0:
+        return False
+    if stock[merch] <n:
+        return False
+    else:
+        return True
+```
+
+### 第五题代码
+
+```python
+MORSE_CODE = {'.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E', '..-.': 'F', '--.': 'G', '....': 'H', '..': 'I', '.---': 'J', '-.-': 'K', '.-..': 'L', '--': 'M', '-.': 'N', '---': 'O', '.--.': 'P', '--.-': 'Q', '.-.': 'R', '...': 'S', '-': 'T', '..-': 'U', '...-': 'V', '.--': 'W', '-..-': 'X', '-.--': 'Y', '--..': 'Z', '-----': '0', '.----': '1', '..---': '2', '...--': '3', '....-': '4', '.....': '5', '-....': '6', '--...': '7', '---..': '8', '----.': '9', '.-.-.-': '.', '--..--': ',', '..--..': '?', '.----.': "'", '-.-.--': '!', '-..-.': '/', '-.--.': '(', '-.--.-': ')', '.-...': '&', '---...': ':', '-.-.-.': ';', '-...-': '=', '.-.-.': '+', '-....-': '-', '..--.-': '_', '.-..-.': '"', '...-..-': '$', '.--.-.': '@', '...---...': 'SOS'}
+def decode_bits(bits):
+    bits = bits.strip("0")
+    unit = 0
+    for bit in bits:
+        if bit!="0":
+            unit += 1
+        else:
+            break
+    count = 1
+    for i in range(1,len(bits)):
+        if bits[i]==bits[i-1]:
+            count += 1
+        else:
+            if count<unit:
+                unit = count
+                count = 1
+            else:
+                count = 1
+    morse_code = ""
+    words = bits.split("0"*7*unit)
+    for word in words:
+        characters = word.split("0"*3*unit)
+        for character in characters:
+            signs = character.split("0"*unit)
+            for sign in signs:
+                if sign == "1"*3*unit:
+                    morse_code +="-"
+                else:
+                    morse_code +="."
+            morse_code += " "
+        morse_code += "   "
+    return morse_code
+
+def decode_morse(morse_code):
+    morse_code.strip()
+    result = ""
+    characters = morse_code.split(" ")
+    for character in characters:
+        if character != "":
+            result += MORSE_CODE[character]
+        else:
+            result += " "
+    return ' '.join(result.split())
+```
+
+- [第三部分 使用Mermaid绘制程序流程图](#第三部分)
+  
+### 第一题流程图
+
+```mermaid
+graph LR
+A(开始)
+B["naughty_times = 0
+    nice_times = 0"]
+C["依次查找每个月每次的情况"]
+D{"是naughty？"}
+E["naughty_times+=1"]
+F{"是Nice？"}
+G["nice_times+=1"]
+I{"naughty_times>nice_times?"}
+K{"已遍历所有情况？"}
+J["返回naughty！"]
+H["返回nice！"]
+A --> B
+B --> C
+C -->D
+C -->F
+D -- yes --> E
+F -- yes --> G
+E --> K
+G --> K
+K --no-->C
+K --yes-->I
+I--yes-->J
+I--no-->H
+J --> Z(结束)
+H --> Z(结束)
+```
+
+### 第二题流程图
+
+```mermaid
+graph LR
+A(开始)
+B["将0-9每个数字相邻的数组都存入数组next_num中"]
+C["将观察到密码的每个数字对应的相邻数字存入answer中"]
+D["对不同组的数组进行排列组合并存入result中"]
+E["返回result"]
+A-->B
+B-->C
+C-->D
+D-->E
+E-->F(结束)
+```
+
+### 第三题流程图
+
+```mermaid
+graph LR
+A(开始)
+F[result=""]
+B["三个字符一组遍历rna，每三个字符构成一个字符串放入codes中"]
+C["依次查找codes中的字符串并对应到PROTEIN_DICT的含义"]
+D{"字符串的含义为Stop?"}
+E["返回result"]
+G["将新的含义加入result中"]
+A --> F
+F --> B
+B -->C
+C -->D
+D -- yes --> E
+D -- no--> G
+G -->C
+E --> Z(结束)
+```
+
+### 第四题流程图
+
+```mermaid
+graph LR
+A(开始)
+B{"stock中存在merch？"}
+C["返回False"]
+D{merch的库存量小于n？}
+F["返回True"]
+A-->B
+B--no-->C
+B--yes-->D
+D--yes-->C
+D--no-->F
+C-->E(结束)
+F-->E(结束)
+```
 
 ## 实验考查
 
 请使用自己的语言并使用尽量简短代码示例回答下面的问题，这些问题将在实验检查时用于提问和答辩以及实际的操作。
 
 1. 字典的键和值有什么区别？
+   字典由键（key）和值（value）成对组成，键和值中间以冒号隔开，项之间用逗号隔开，整个字典由大括号括起来。键通常是唯一的，而值则不需要唯一。
 2. 在读取和写入字典时，需要使用默认值可以使用什么方法？
+   在读取和写入字典时，可以使用get()方法设置默认值。如果指定的键不存在于字典中，get()方法将返回默认值。
 3. Python中的while循环和for循环有什么区别？
-4. 阅读[PEP 636 – Structural Pattern Matching: Tutorial](https://peps.python.org/pep-0636/), 总结Python 3.10中新出现的match语句的使用方法。
+   while循环会一直执行代码块，直到指定的条件不再满足为止。这意味着，只要条件为真，循环就会一直执行。而for循环则适用于遍历序列（如列表或字符串）中的每个元素。在每次迭代中，元素都会被赋值给循环变量，然后执行循环体。当所有元素都被遍历后，循环就会结束。因此，while循环适合在不确定迭代次数的情况下使用，而for循环则更适合用于遍历已知序列。
+4. 阅读[PEP 636 – Structural Pattern Matching: Tutorial](https://peps.python.org/pep-0636/), 总结Python 3.10中新出现的match语句的使用方法。  
+   （1）用于对某个值进行模式匹配，并根据匹配结果执行相应的代码块。匹配模式使用竖线'|'分隔，每个模式用冒号':'和相应的代码块分隔。模式可以是常量、变量、字面值、类型等。如果匹配成功，match语句会执行与匹配模式对应的代码块，并返回该代码块的结果。  
+   （2）match语句还可以使用case关键字来进一步细化匹配条件。case关键字后面可以跟具体的模式和代码块，以及if语句来添加额外的条件。  
+   （3）match语句中可以使用_作为通配符，表示匹配任意值。
 
 ## 实验总结
 
-总结一下这次实验你学习和使用到的知识，例如：编程工具的使用、数据结构、程序语言的语法、算法、编程技巧、编程思想。
+总结一下这次实验你学习和使用到的知识，例如：编程工具的使用、数据结构、程序语言的语法、算法、编程技巧、编程思想。  
+在本次实验中我学习了Python中的字典，字典是一种可变且无序的数据结构，它由键值对组成，可以用于存储和检索相关联的数据。熟悉了Python的基本语法，包括变量的声明、条件语句（如if语句）、循环语句（如while循环）和用户输入的处理。可以使用了算法来解决问题，例如遍历字典的键值对、根据用户输入进行条件判断和循环处理等。除此之外，我还了解了一些基本的编程思想，例如模块化、抽象化、封装和代码复用等。这些思想可以帮助我更好地组织和管理代码，使其更易于理解和维护。
