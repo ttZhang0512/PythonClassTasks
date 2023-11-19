@@ -1,14 +1,14 @@
 # 实验七 Python面向对象编程
 
-班级： 21计科1
+班级： 21计科4
 
-学号： 202302200000
+学号： 20210301105
 
-姓名： 张三
+姓名： 张湘睿
 
-Github地址：<https://github.com/yourusername/python_course>
+Github地址：<https://github.com/ttZhang0512/PythonClassTasks.git>
 
-CodeWars地址：<https://www.codewars.com/users/yourusername>
+CodeWars地址：<https://www.codewars.com/users/ttZhang0512>
 
 ---
 
@@ -240,7 +240,7 @@ user.rank # => -7 # rank was upgraded to -7
 
 使用Markdown语法绘制你的程序绘制程序类图（至少一个），Markdown代码如下：
 
-![程序类图](/Experiments/img/2023-08-08-22-47-53.png)
+![程序类图](img/2023-08-08-22-47-53.png)
 
 显示效果如下：
 
@@ -282,45 +282,289 @@ classDiagram
 请将实验过程与结果放在这里，包括：
 
 - [第一部分 Python面向对象编程](#第一部分)
+
 - [第二部分 Codewars Kata挑战](#第二部分)
-- [第三部分 使用Mermaid绘制程序流程图](#第三部分)
 
-注意代码需要使用markdown的代码块格式化，例如Git命令行语句应该使用下面的格式：
-
-![Git命令](/Experiments/img/2023-07-26-22-48.png)
-
-显示效果如下：
-
-```bash
-git init
-git add .
-git status
-git commit -m "first commit"
-```
-
-如果是Python代码，应该使用下面代码块格式，例如：
-
-![Python代码](/Experiments/img/2023-07-26-22-52-20.png)
-
-显示效果如下：
+### 第一题代码
 
 ```python
-def add_binary(a,b):
-    return bin(a+b)[2:]
+class Ship:
+    def __init__(self, draft, crew):
+        self.draft = draft
+        self.crew = crew
+    def is_worth_it(self):
+        if self.draft-self.crew*1.5>20: return True
+        else:   return False
 ```
 
-代码运行结果的文本可以直接粘贴在这里。
+### 第二题代码
 
-**注意：不要使用截图，Markdown文档转换为Pdf格式后，截图可能会无法显示。**
+```python
+class Block:
+    def __init__(self,args):
+        self.width = args[0]
+        self.length = args[1]
+        self.height = args[2]
+        
+    def get_width(self):
+        return self.width
+    def get_length(self):
+        return self.length
+    def get_height(self):
+        return self.height
+    
+    def get_volume(self):
+        return self.width*self.length*self.height
+    def get_surface_area(self):
+        return 2*(self.width*self.length + self.width*self.height+self.length*self.height)
+```
+
+### 第三题代码
+
+```python
+import math
+class   PaginationHelper:
+    def __init__(self,collection,items_per_page):
+        self.collection = collection
+        self.items_per_page = items_per_page
+        
+    def item_count(self):
+        return len(self.collection)
+    def page_count(self):
+        return math.ceil(self.item_count()/self.items_per_page)
+    def page_item_count(self,page_index):
+        if page_index>=self.page_count() or page_index<0:
+            return -1
+        if page_index==self.page_count()-1:
+            last_page = self.item_count()%self.items_per_page
+            if last_page==0:    return self.items_per_page
+            else:   return last_page
+        else:
+            return self.items_per_page
+    def page_index(self,item_index):
+        if item_index>=self.item_count() or item_index<0:   return -1
+        else:   return item_index//self.items_per_page
+```
+
+### 第四题代码
+
+```python
+from math import sqrt 
+class Vector:
+    def __init__(self,iterable):
+        self.examples = tuple(i for i in iterable)
+    def __str__(self):
+        return str(self.examples).replace(' ','')
+    def check(self,str2):
+        if not len(self.examples)==len(str2.examples):
+            raise ValueError('Vectors of different length')
+    def add(self,str2):
+        self.check(str2)
+        return Vector(i+j for i,j in zip(self.examples,str2.examples))
+    def subtract(self,str2):
+        self.check(str2)
+        return Vector(i-j for i,j in zip(self.examples,str2.examples))
+    def dot(self,str2):
+        self.check(str2)
+        return sum(i*j for i,j in zip(self.examples,str2.examples)) 
+    def norm(self):
+        return sqrt(sum(x**2 for x in self.examples))
+    def equals(self,str2):
+        return self.examples==str2.examples
+```
+
+### 第五题代码
+
+```python
+class User():
+    def __init__(self):
+        self.ranks = [-8, -7, -6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6, 7, 8]
+        self.rank = -8
+        self.index = 0
+        self.progress = 0
+    
+    def inc_progress(self,rank):
+        index = self.ranks.index(rank)
+        if index == self.index:
+            self.progress+=3
+        elif index==self.index-1 or (index==1 and self.index==-1):
+            self.progress+=1
+        elif index > self.index:
+            if(index>0 and self.index<0):
+                x = index-self.index+1
+            else:
+                x = index-self.index
+            self.progress +=10*x*x
+        while self.progress >= 100:
+            self.index += 1
+            self.rank = self.ranks[self.index]
+            self.progress -=100
+        if self.rank ==8 :
+            self.progress=0
+            return
+```
+
+- [第三部分 使用Mermaid绘制类图](#第三部分)
+
+### 第一题类图
+
+```mermaid
+---
+title: Ship
+---
+classDiagram
+    class Ship {
+        -draft: int
+        -crew: int
+        +__init__(self,draft: int, crew: int)
+        +is_worth_it()
+    }
+
+```
+
+### 第二题类图
+
+```mermaid
+---
+title: Block
+---
+classDiagram
+    class Block {
+        -width: float
+        -length: float
+        -height: float
+        +__init__(self,args: list)
+        +get_width()
+        +get_length()
+        +get_height()
+        +get_volume()
+        +get_surface_area()
+    }
+```
+
+### 第三题类图
+
+```mermaid
+---
+title: PaginationHelper
+---
+classDiagram
+    class PaginationHelper {
+        -collection: list
+        -items_per_page: int
+        +__init__(self,collection: list, items_per_page: int)
+        +item_count()
+        +page_count()
+        +page_item_count(page_index: int)
+        +page_index(item_index: int)
+    }
+```
+
+### 第四题类图
+
+```mermaid
+---
+title: Vector
+---
+classDiagram
+    class Vector {
+        -examples: tuple
+        +__init__(self,iterable)
+        +__str__()
+        +check(str2: Vector)
+        +add(str2: Vector)
+        +subtract(str2: Vector)
+        +dot(str2: Vector)
+        +norm()
+        +equals(str2: Vector)
+    }
+```
+
+### 第五题类图
+
+```mermaid
+---
+title: User
+---
+classDiagram
+    class User {
+        -ranks: list
+        -rank: int
+        -index: int
+        -progress: int
+        +__init__()
+        +inc_progress(rank: int): None
+    }
+```
 
 ## 实验考查
 
 请使用自己的语言并使用尽量简短代码示例回答下面的问题，这些问题将在实验检查时用于提问和答辩以及实际的操作。
 
-1. Python的类中__init__方法起什么作用？
-2. Python语言中如何继承父类和改写（override）父类的方法。
-3. Python类有那些特殊的方法？它们的作用是什么？请举三个例子并编写简单的代码说明。
+1. Python的类中__init__方法起什么作用？  
+Python中的__init__方法是一个特殊的方法，用于在创建一个对象时进行初始化操作。它在对象被创建时自动调用，用于设置对象的初始状态，也可以接收参数来对对象进行初始化。
+2. Python语言中如何继承父类和改写（override）父类的方法。  
+要继承父类并改写（override）父类的方法，可以在子类中定义一个同名的方法，就可以覆盖父类中的方法。例如：
+
+```python
+class ParentClass:
+    def some_method(self):
+        print("父类")
+
+class ChildClass(ParentClass):
+    def some_method(self):
+        print("子类覆盖父类的同名方法")
+
+```
+
+3. Python类有那些特殊的方法？它们的作用是什么？请举三个例子并编写简单的代码说明。  
+特殊方法允许自定义类的行为从而实现特定的功能，例如创建可迭代对象、支持比较操作、实现上下文管理等。
+1、init() 方法：该方法在类实例化时被调用，用于初始化类的属性。  
+
+```python
+class example:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+my_object = example('John', 30)
+print(my_object.name)  # Output: 'John'
+print(my_object.age)  # Output: 30
+```
+
+2、str() 方法：该方法返回类的字符串表示形式。  
+
+```python
+class example:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __str__(self):
+        return f'My name is {self.name} and I am {self.age} years old.'
+
+my_object = example('John', 30)
+print(my_object)  # Output: 'My name is John and I am 30 years old.'
+```
+
+3、add() 方法：该方法实现类的加法运算。
+
+```python
+class example:
+    def __init__(self, value):
+        self.value = value
+
+    def __add__(self, other):
+        return example(self.value + other.value)
+
+my_object1 = example(10)
+my_object2 = example(20)
+my_object3 = my_object1 + my_object2
+print(my_object3.value)  # Output: 30
+```
 
 ## 实验总结
 
-总结一下这次实验你学习和使用到的知识，例如：编程工具的使用、数据结构、程序语言的语法、算法、编程技巧、编程思想。
+总结一下这次实验你学习和使用到的知识，例如：编程工具的使用、数据结构、程序语言的语法、算法、编程技巧、编程思想。  
+
+在这次实验中，我学习了Python中的namedtuple和dataclass,用于创建具有命名字段的数据结构，能更好地提高代码的可读性和可维护性。除此之外，通过对Python的类与继承的进一步学习，加深了我对Python类和继承的理解。我学会了如何使用这些工具来定义和操作数据结构，提高了我的编程技巧，也转变了我的思维方式，使我能够更好地应用这些工具来解决实际的编程问题。
