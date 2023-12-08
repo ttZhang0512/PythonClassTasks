@@ -1,0 +1,19 @@
+{% extends 'blogs/base.html' %}
+{% block page_header %}
+    <h1>Bloggers</h1>
+{% endblock page_header %}
+
+{% block content %}
+    <ul class="list-group border-bottom pb-2 mb-4">
+        {% for blogger in bloggers %}
+            <li class="list-group-item border-O">
+                <a href= "{% url 'blogs:blogger' blogger.id %}">
+                    {{blogger.text }}</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item border-O">No bloggers have been added yet.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'blogs:new_blogger' %}">Add a new blogger</a>
+{% endblock content %}
